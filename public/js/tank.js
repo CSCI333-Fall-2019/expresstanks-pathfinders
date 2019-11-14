@@ -77,6 +77,16 @@ function Tank(startPos, tankColor, newtankid, playerName) {
       this.vel.z = 0;
     }
 
+    this.isFacingAndNextTo = function(){
+      if(sin(this.heading) < 0){
+      
+        console.log(this.heading);
+      }
+      else{
+        console.log("new knowledge");
+      }
+    }
+
     this.setRotation = function(a) {
         this.rotation = a;
     }

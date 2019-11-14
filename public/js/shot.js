@@ -29,6 +29,15 @@ function Shot(shotid, tankid, spos, angle, color) {
         return false;
       }
     }
+
+    this.hitsWall = function(wall){
+      if(this.x > wall.x && this.x < wall.x + wall.width){
+        if(this.y > wall.y && this.y < wall.y + wall.height){
+          return true;
+        }
+      }
+      return false;
+    }
   
     // Check if the shot moves off screen.  In which case, kill it
     this.offscreen = function() {

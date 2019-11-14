@@ -5,6 +5,8 @@ let shots = []; // All shots in the game
 var mytankid;
 var myTankIndex = -1;
 
+var wallPos;
+var wall;
 var socket;
 var oldTankx, oldTanky, oldTankHeading;
 var fps = 60; // Frames per second
@@ -13,6 +15,9 @@ var DEBUG = 0;
 
 // Initial Setup
 function setup() {
+
+  wallPos  =  createVector(100, 100);
+  wall = new Wall(wallPos);
 
   // Get the Player
   PlayerName = document.getElementById('playerName').value;
@@ -56,6 +61,9 @@ function setup() {
 // Draw the screen and process the position updates
 function draw() {
     background(0);
+    wall.render();
+
+
 
     // Process shots
     for (var i = shots.length - 1; i >= 0; i--) {
@@ -77,7 +85,7 @@ function draw() {
           tanks[t].render();
           tanks[t].turn();
           tanks[t].update();
-
+          tanks[t].isFacingAndNextTo();
           // Check for off screen and don't let it go any further
           if(tanks[t].pos.x < 0)
             tanks[t].pos.x = 0;
