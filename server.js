@@ -6,6 +6,7 @@ const request = require('request');
 // Game items to remember
 var tanks = [];
 var shots = [];
+var map = new Map(testMap);
 
 // Set up the server
 // process.env.PORT is related to deploying on AWS

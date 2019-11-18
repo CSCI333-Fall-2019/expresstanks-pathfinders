@@ -34,11 +34,53 @@ testMap.push(row9);
 class Map {
    // Takes a text file and interprets the characters in it to create an array of the various spaces
    constructor(mapText) {
-      testMap.forEach(row => {
-         row.forEach(cell => {
-            console.log(cell);
+      // Set up map dimensions
+      this.colCount = mapText.length;
+      this.rowCount = mapText[0].length;
+
+      // Set up starting zone arrays
+      this.sz_t1 = [];
+      this.sz_t2 = [];
+      this.sz_t3 = [];
+      this.sz_t4 = [];
+
+      // Set up wall/obstacle array
+      this.features = [];
+
+      // Load the map
+      // TODO: LOAD TXT FILE
+
+      // Create the objects
+      mapText.forEach(row, idx => {
+         row.forEach(cell, i => {
+            console.log("(" + idx + ", " + i + ") " + cell);
+
+            // Translate the indexes to x, y coordinates
+            let x = i * win.height;
+            let y = idx * win.width;
+
+            if (0) // Keep alphabetized...
+               return;
+            else if (cell == 1)
+               this.sz_t1.push([x, y]);
+            else if (cell == 2)
+               this.sz_t2.push([x, y]);
+            else if (cell == 3)
+               this.sz_t3.push([x, y]);
+            else if (cell == 4)
+               this.sz_t4.push([x, y]);
+            else if (cell == 'W')
+               this.features.push(new Wall(x, y));
+            else if (cell == 'O')
+               this.features.push(new Obstacle(x, y));
          });
       });
-      testMap;
+   }
+
+   render() {
+      // calls the render of each of its sub-objects
+      this.features.forEach(feature => {
+         feature.render();
+      });
    }
 }
