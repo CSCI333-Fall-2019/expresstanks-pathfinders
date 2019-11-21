@@ -9,7 +9,7 @@ var wallPos;
 var wall;
 var socket;
 var oldTankx, oldTanky, oldTankHeading;
-var fps = 60; // Frames per second
+var fps = 5; // Frames per second
 var PlayerName = "";
 var DEBUG = 0;
 
@@ -85,8 +85,9 @@ function draw() {
           tanks[t].render();
           tanks[t].turn();
           tanks[t].update();
-          
-          tanks[t].isFacingAndNextTo(wall);
+          tanks[t].turn();
+
+          wall.collision(tanks[t]);
           // Check for off screen and don't let it go any further
           if(tanks[t].pos.x < 0)
             tanks[t].pos.x = 0;
