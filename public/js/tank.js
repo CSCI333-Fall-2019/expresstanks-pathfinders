@@ -95,4 +95,40 @@ function Tank(startPos, tankColor, newtankid, playerName) {
       this.pos.add(this.vel);
       this.heading = this.heading % 6.3;
     }
+
+    this.isFacingAndNextTo = function(wall){
+ 
+      var dist = this.dist(wall.pos.x, this.pos.x, wall.pos.y, this.pos.y);
+      console.log(this.heading);
+     // console.log(dist);
+    // console.log(wall.pos.x + "<?" + this.pos.x);
+ 
+      if(dist < wall.width){
+        if((this.heading < -2.5 && this.heading  > -3.5)||(this.heading > 2.4 && this.heading  < 4.2)){
+          if(wall.pos.x < this.pos.x){
+            console.log("STOP");
+            this.stopMotion();
+          }
+        }
+        if((this.heading > -2.4 && this.heading  < -.9)||(this.heading > 4.2 && this.heading  < 5.6)){
+          if(wall.pos.y < this.pos.y){
+            console.log("STOP");
+            this.stopMotion();
+          }
+        }
+        if((this.heading < 0 && this.heading > -1 && this.heading  < -5.2 )||(this.heading > 0 && this.heading < 1 && this.heading  > 5.6) ){
+          if(wall.pos.x > this.pos.x){
+            console.log("STOP");
+            this.stopMotion();
+          }
+        }
+        if((this.heading > -5.2 && this.heading  < -4.1)||(this.heading > 1 && this.heading  < 2.4)){
+          if(wall.pos.y > this.pos.y){
+            console.log("STOP");
+            this.stopMotion();
+          }
+        }
+      }
+    }
+
 }

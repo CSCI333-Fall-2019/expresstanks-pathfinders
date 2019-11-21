@@ -8,25 +8,25 @@
 
 // For now, just have a string:
 var testMap = [];
-var row0 = ['1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '4'];
+var row0 = ['1', '_', '_', '_', '_', '_', '_', '_', '_', '4'];
 
-var row1 = ['1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '4'];
+var row1 = ['1', '_', '_', '_', '_', '_', '_', '_', '_', '4'];
 
-var row2 = ['1', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', '4'];
+var row2 = ['1', '_', 'O', '_', '_', '_', '_', '_', '_', '4'];
 
-var row3 = ['1', ' ', ' ', ' ', 'W', ' ', ' ', 'O', ' ', '4'];
+var row3 = ['1', '_', '_', '_', 'W', '_', '_', 'O', '_', '4'];
 
-var row4 = ['1', ' ', ' ', ' ', 'W', ' ', ' ', ' ', ' ', '4'];
+var row4 = ['1', '_', '_', '_', 'W', '_', '_', '_', '_', '4'];
 
-var row5 = ['W', 'W', 'W', ' ', 'W', ' ', ' ', 'W', 'W', 'W'];
+var row5 = ['W', 'W', 'W', '_', 'W', '_', '_', 'W', 'W', 'W'];
 
-var row6 = ['3', 'O', ' ', ' ', 'W', ' ', ' ', ' ', ' ', '2'];
+var row6 = ['3', 'O', '_', '_', 'W', '_', '_', '_', '_', '2'];
 
-var row7 = ['3', ' ', ' ', ' ', 'W', ' ', 'O', ' ', ' ', '2'];
+var row7 = ['3', '_', '_', '_', 'W', '_', 'O', '_', '_', '2'];
 
-var row8 = ['3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2'];
+var row8 = ['3', '_', '_', '_', '_', '_', '_', '_', '_', '2'];
 
-var row9 = ['3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2'];
+var row9 = ['3', '_', '_', '_', '_', '_', '_', '_', '_', '2'];
 
 testMap.push(row0);
 testMap.push(row1);
@@ -73,33 +73,35 @@ class Map {
             // Translate the indexes to x, y coordinates
             let x = i * win.height;
             let y = idx * win.width;
+            let w = win.width / this.colCount;
+            let h = win.height / this.rowCount;
 
             if (0) // Keep alphabetized...
                return;
             else if (cell == 1)
-               this.sz_t1.push([x, y]);
+               this.sz_t1.push([x, y, w, h]);
             else if (cell == 2)
-               this.sz_t2.push([x, y]);
+               this.sz_t2.push([x, y, w, h]);
             else if (cell == 3)
-               this.sz_t3.push([x, y]);
+               this.sz_t3.push([x, y, w, h]);
             else if (cell == 4)
-               this.sz_t4.push([x, y]);
+               this.sz_t4.push([x, y, w, h]);
             else if (cell == 5)
-               this.sz_t5.push([x, y]);
+               this.sz_t5.push([x, y, w, h]);
             else if (cell == 6)
-               this.sz_t6.push([x, y]);
+               this.sz_t6.push([x, y, w, h]);
             else if (cell == 7)
-               this.sz_t7.push([x, y]);
+               this.sz_t7.push([x, y, w, h]);
             else if (cell == 8)
-               this.sz_t8.push([x, y]);
+               this.sz_t8.push([x, y, w, h]);
             else if (cell == 9)
-               this.sz_t9.push([x, y]);
+               this.sz_t9.push([x, y, w, h]);
             else if (cell == 'W')
                this.features.push(new Wall(createVector(x, y)));
             else if (cell == 'O')
                this.features.push(new Obstacle(createVector(x, y)));
             else if (cell == 'D')
-               this.dropZone.push(new Drop(x, y));
+               this.dropZone.push([x, y, w, h]);
          });
       });
    }

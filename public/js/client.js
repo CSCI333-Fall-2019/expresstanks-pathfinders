@@ -12,12 +12,13 @@ var oldTankx, oldTanky, oldTankHeading;
 var fps = 5; // Frames per second
 var PlayerName = "";
 var DEBUG = 0;
+var map;
 
 // Initial Setup
 function setup() {
-
-  wallPos  =  createVector(100, 100);
-  wall = new Wall(wallPos);
+  map = new Map(testMap); // REMOVE
+  // wallPos  =  createVector(100, 100);
+  // wall = new Wall(wallPos);
 
   // Get the Player
   PlayerName = document.getElementById('playerName').value;
@@ -61,9 +62,7 @@ function setup() {
 // Draw the screen and process the position updates
 function draw() {
     background(0);
-    wall.render();
-
-
+    map.render();
 
     // Process shots
     for (var i = shots.length - 1; i >= 0; i--) {
