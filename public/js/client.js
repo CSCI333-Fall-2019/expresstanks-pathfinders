@@ -12,13 +12,11 @@ var oldTankx, oldTanky, oldTankHeading;
 var fps = 5; // Frames per second
 var PlayerName = "";
 var DEBUG = 0;
-var map;
+var map; // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
 
 // Initial Setup
 function setup() {
-  map = new Map(testMap); // REMOVE
-  // wallPos  =  createVector(100, 100);
-  // wall = new Wall(wallPos);
+  map = new Map(testMap); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
 
   // Get the Player
   PlayerName = document.getElementById('playerName').value;
@@ -86,7 +84,11 @@ function draw() {
           tanks[t].update();
           tanks[t].turn();
 
-          wall.collision(tanks[t]);
+          map.features.forEach(f => { // 11/21/2019 - Heidi - Handles the collision 
+            if (f.collision())
+              f.collision(tanks[t]);
+          });
+
           // Check for off screen and don't let it go any further
           if(tanks[t].pos.x < 0)
             tanks[t].pos.x = 0;
