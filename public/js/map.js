@@ -101,9 +101,9 @@ class Map {
             else if (cell == 9)
                this.sz_t9.push(packet);
             else if (cell == 'W')
-               this.features.push(new Wall(x, y));
+               this.features.push(new Wall(createVector(x, y)));
             else if (cell == 'O')
-               this.features.push(new Obstacle(x, y));
+               this.features.push(new Obstacle(createVector(x, y)));
             else if (cell == 'D')
                this.dropZone.push(packet);
             else if (cell = 'B')
