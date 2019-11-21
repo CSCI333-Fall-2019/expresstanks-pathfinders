@@ -1,0 +1,8 @@
+Maps follow the following formats:
+
+1. A return key indicates that the edge of the map has been reached
+
+Entities:
+W = Wall
+O = Obstacle
+1-9 = Team 1-9 spawn area
