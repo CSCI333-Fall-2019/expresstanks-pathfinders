@@ -6,3 +6,7 @@ Entities:
 W = Wall
 O = Obstacle
 1-9 = Team 1-9 spawn area
+_ = Nothing (So that the edges of the map are visible)
+D = Drop (power-ups)
+N = Possible nuke locations
+
