@@ -57,6 +57,8 @@ class Map {
       // Set up wall/obstacle array
       this.features = [];
       this.dropZone = [];
+      this.buzzSpawn = [];
+      this.nukeSpawn = [];
 
       // Load the map
       // TODO: LOAD TXT FILE INTO ARRAY OF ROW ARRAYS HOLDING COLUMNS
@@ -76,32 +78,38 @@ class Map {
             let w = win.width / this.colCount;
             let h = win.height / this.rowCount;
 
+            let packet = [x, y, w, h];
+
             if (0) // Keep alphabetized...
                return;
             else if (cell == 1)
-               this.sz_t1.push([x, y, w, h]);
+               this.sz_t1.push(packet);
             else if (cell == 2)
-               this.sz_t2.push([x, y, w, h]);
+               this.sz_t2.push(packet);
             else if (cell == 3)
-               this.sz_t3.push([x, y, w, h]);
+               this.sz_t3.push(packet);
             else if (cell == 4)
-               this.sz_t4.push([x, y, w, h]);
+               this.sz_t4.push(packet);
             else if (cell == 5)
-               this.sz_t5.push([x, y, w, h]);
+               this.sz_t5.push(packet);
             else if (cell == 6)
-               this.sz_t6.push([x, y, w, h]);
+               this.sz_t6.push(packet);
             else if (cell == 7)
-               this.sz_t7.push([x, y, w, h]);
+               this.sz_t7.push(packet);
             else if (cell == 8)
-               this.sz_t8.push([x, y, w, h]);
+               this.sz_t8.push(packet);
             else if (cell == 9)
-               this.sz_t9.push([x, y, w, h]);
+               this.sz_t9.push(packet);
             else if (cell == 'W')
                this.features.push(new Wall(x, y));
             else if (cell == 'O')
                this.features.push(new Obstacle(x, y));
             else if (cell == 'D')
-               this.dropZone.push([x, y, w, h]);
+               this.dropZone.push(packet);
+            else if (cell = 'B')
+               this.buzzSpawn.push(packet);
+            else if (cell = 'N')
+               this.nukeSpawn.push(packet);
          });
       });
    }
