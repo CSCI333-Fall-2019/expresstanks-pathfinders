@@ -77,15 +77,47 @@ function Tank(startPos, tankColor, newtankid, playerName) {
       this.vel.z = 0;
     }
 
-    this.isFacingAndNextTo = function(){
-      if(sin(this.heading) < 0){
-      
-        console.log(this.heading);
-      }
-      else{
-        console.log("new knowledge");
+    this.dist = function(x1,x2,y1,y2){
+      var init  = Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2);
+      return Math.sqrt(init);
+    }
+
+    this.isFacingAndNextTo = function(wall){
+
+      var dist = this.dist(wall.pos.x, this.pos.x, wall.pos.y, this.pos.y);
+      console.log(this.heading);
+     // console.log(dist);
+    // console.log(wall.pos.x + "<?" + this.pos.x);
+
+      if(dist < wall.width){
+        if((this.heading < -1.6 && this.heading  > -4.7)||(this.heading > 1.6 && this.heading  < 4.7)){
+          if(this.pos.x < wall.pos.x + 60){
+            console.log("STOP");
+            this.pos.x = wall.pos.x + wall.width;
+          }
+        }
+        if((this.heading > -2.4 && this.heading  < -.9)||(this.heading > 4.2 && this.heading  < 5.6)){
+          if(wall.pos.y < this.pos.y){
+            console.log("STOP");
+            this.stopMotion();
+          }
+        }
+        if((this.heading < 0 && this.heading > -1 && this.heading  < -5.2 )||(this.heading > 0 && this.heading < 1 && this.heading  > 5.6) ){
+          if(wall.pos.x > this.pos.x){
+            console.log("STOP");
+            this.stopMotion();
+          }
+        }
+        if((this.heading > -5.2 && this.heading  < -4.1)||(this.heading > 1 && this.heading  < 2.4)){
+          if(wall.pos.y > this.pos.y){
+            console.log("STOP");
+            this.stopMotion();
+          }
+        }
       }
     }
+
+    
 
     this.setRotation = function(a) {
         this.rotation = a;
@@ -95,11 +127,13 @@ function Tank(startPos, tankColor, newtankid, playerName) {
         this.heading += this.rotation;
     }
 
+
     // Update its forward and backward motion
     this.update = function() {
       if (this.isBoosting) {
         this.boost();
       }
       this.pos.add(this.vel);
+      this.heading = this.heading % 6.3;
     }
 }

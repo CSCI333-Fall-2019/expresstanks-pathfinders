@@ -85,7 +85,8 @@ function draw() {
           tanks[t].render();
           tanks[t].turn();
           tanks[t].update();
-          tanks[t].isFacingAndNextTo();
+          
+          tanks[t].isFacingAndNextTo(wall);
           // Check for off screen and don't let it go any further
           if(tanks[t].pos.x < 0)
             tanks[t].pos.x = 0;
@@ -165,7 +166,6 @@ function draw() {
   //  ***** Socket communication handlers ******
 
   function ServerReadyAddNew(data) {
-    console.log('Server Ready');
 
     // Reset the tanks
     tanks = [];
@@ -235,9 +235,6 @@ function draw() {
     }
 
     function ServerMoveTank(data) {
-
-      if(DEBUG && DEBUG==1)
-        console.log('Move Tank: ' + JSON.stringify(data));
 
       if(!tanks || !tanks[myTankIndex] || !data || !data.tankid || tanks[myTankIndex].tankid == data.tankid)
         return;
