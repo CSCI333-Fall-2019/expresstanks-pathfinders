@@ -12,6 +12,7 @@ var oldTankx, oldTanky, oldTankHeading;
 var fps = 5; // Frames per second
 var PlayerName = "";
 var DEBUG = 0;
+var testMap = ""; // 11/21/2019 - Heidi
 var map; // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
 
 // Initial Setup
@@ -60,7 +61,7 @@ function setup() {
 // Draw the screen and process the position updates
 function draw() {
     background(0);
-    map.render();
+    map.render(); // 11/21/2019 - Heidi - Renders the map object (and any children of the map object)
 
     // Process shots
     for (var i = shots.length - 1; i >= 0; i--) {
@@ -84,10 +85,10 @@ function draw() {
           tanks[t].update();
           tanks[t].turn();
 
-          map.features.forEach(f => { // 11/21/2019 - Heidi - Handles the collision 
-            if (f.collision())
-              f.collision(tanks[t]);
-          });
+          map.features.forEach(f => { // 11/21/2019 - Heidi - Handles the collision of any feature (wall or obstacle)
+            if (f.collision()) // 11/21/2019 - Heidi
+              f.collision(tanks[t]); // 11/21/2019 - Heidi
+          }); // 11/21/2019 - Heidi
 
           // Check for off screen and don't let it go any further
           if(tanks[t].pos.x < 0)

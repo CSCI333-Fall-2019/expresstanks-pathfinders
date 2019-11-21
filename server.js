@@ -6,6 +6,7 @@ const request = require('request');
 // Game items to remember
 var tanks = [];
 var shots = [];
+var testMap = ""; // 11/21/2019 - Heidi
 var map = new Map(testMap); // 11/21/2019 - Heidi - New map object to pass down to the client (this is the only change in the server file)
 
 // Set up the server

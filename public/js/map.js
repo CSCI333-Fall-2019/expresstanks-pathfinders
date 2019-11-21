@@ -70,7 +70,7 @@ class Map {
       this.rowCount = finalMap[0].length;
 
       // Create the objects
-      mapText.forEach(row, idx => {
+      finalMap.forEach(row, idx => {
          row.forEach(cell, i => {
             console.log("(" + idx + ", " + i + ") " + cell);
 
@@ -113,6 +113,11 @@ class Map {
             else if (cell = 'N')
                this.nukeSpawn.push(packet);
          });
+      });
+
+      console.log("New map generated.");
+      finalMap.forEach(row, idx => {
+         console.log(row);
       });
    }
 
