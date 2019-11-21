@@ -63,8 +63,6 @@ function draw() {
     background(0);
     wall.render();
 
-
-
     // Process shots
     for (var i = shots.length - 1; i >= 0; i--) {
       shots[i].render();
