@@ -7,7 +7,7 @@
 /* # # # # # # # # # # Documentation # # # # # # # # # # */
 class Map {
    // Takes a text file and interprets the characters in it to create an array of the various spaces
-   constructor(mapText) {
+      constructor() {
       // Set up starting zone arrays
       this.sz_t1 = [];
       this.sz_t2 = [];
@@ -70,13 +70,11 @@ class Map {
       this.rowCount = finalMap[0].length;
 
       // Create the objects
-      finalMap.forEach(row, idx => {
-         row.forEach(cell, i => {
-            console.log("(" + idx + ", " + i + ") " + cell);
-
+      for (let r = 0 ; r < finalMap.length ; r++) {
+         for (let c = 0; c < finalMap[r].length ; c++) {
             // Translate the indexes to x, y coordinates
-            let x = i * win.height;
-            let y = idx * win.width;
+            let x = c * win.height;
+            let y = r * win.width;
             let w = win.width / this.colCount;
             let h = win.height / this.rowCount;
 
@@ -84,41 +82,36 @@ class Map {
 
             if (0) // Keep alphabetized...
                return;
-            else if (cell == 1)
+            else if (finalMap[r][c] == '1')
                this.sz_t1.push(packet);
-            else if (cell == 2)
+            else if (finalMap[r][c] == '2')
                this.sz_t2.push(packet);
-            else if (cell == 3)
+            else if (finalMap[r][c] == '3')
                this.sz_t3.push(packet);
-            else if (cell == 4)
+            else if (finalMap[r][c] == '4')
                this.sz_t4.push(packet);
-            else if (cell == 5)
+            else if (finalMap[r][c] == '5')
                this.sz_t5.push(packet);
-            else if (cell == 6)
+            else if (finalMap[r][c] == '6')
                this.sz_t6.push(packet);
-            else if (cell == 7)
+            else if (finalMap[r][c] == '7')
                this.sz_t7.push(packet);
-            else if (cell == 8)
+            else if (finalMap[r][c] == '8')
                this.sz_t8.push(packet);
-            else if (cell == 9)
+            else if (finalMap[r][c] == '9')
                this.sz_t9.push(packet);
-            else if (cell == 'W')
+            else if (finalMap[r][c] == 'W')
                this.features.push(new Wall(createVector(x, y)));
-            else if (cell == 'O')
+            else if (finalMap[r][c] == 'O')
                this.features.push(new Obstacle(createVector(x, y)));
-            else if (cell == 'D')
+            else if (finalMap[r][c] == 'D')
                this.dropZone.push(packet);
-            else if (cell = 'B')
+            else if (finalMap[r][c] = 'B')
                this.buzzSpawn.push(packet);
-            else if (cell = 'N')
+            else if (finalMap[r][c] = 'N')
                this.nukeSpawn.push(packet);
-         });
-      });
-
-      console.log("New map generated.");
-      finalMap.forEach(row, idx => {
-         console.log(row);
-      });
+         }
+      }
    }
 
    render() {

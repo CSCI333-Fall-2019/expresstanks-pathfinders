@@ -1,6 +1,3 @@
-
-
-
 class Wall{
 
     constructor(pos){

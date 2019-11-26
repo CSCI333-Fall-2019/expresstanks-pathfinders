@@ -12,13 +12,10 @@ var oldTankx, oldTanky, oldTankHeading;
 var fps = 5; // Frames per second
 var PlayerName = "";
 var DEBUG = 0;
-var testMap = ""; // 11/21/2019 - Heidi
 var map; // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
 
 // Initial Setup
 function setup() {
-  map = new Map(testMap); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
-
   // Get the Player
   PlayerName = document.getElementById('playerName').value;
   console.log('Player: ' + PlayerName);
@@ -35,6 +32,9 @@ function setup() {
   var canvas = createCanvas(win.width, win.height);
   canvas.parent('sketch-holder');
 
+  map = new Map(); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
+  console.log(map); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
+  
   // Set the framerate so everyone is *hopefully* the same
   frameRate(fps); // As low as possible to not tax slow systems
 
@@ -85,10 +85,9 @@ function draw() {
           tanks[t].update();
           tanks[t].turn();
 
-          map.features.forEach(f => { // 11/21/2019 - Heidi - Handles the collision of any feature (wall or obstacle)
-            if (f.collision()) // 11/21/2019 - Heidi
-              f.collision(tanks[t]); // 11/21/2019 - Heidi
-          }); // 11/21/2019 - Heidi
+          for (let c = 0 ; c < map.features.length ; c++) { // 11/21/2019 - Heidi - Handles the collision of any feature (wall or obstacle)
+            map.features[c].collision(tanks[t]); // 11/21/2019 - Heidi
+          } // 11/21/2019 - Heidi
 
           // Check for off screen and don't let it go any further
           if(tanks[t].pos.x < 0)
