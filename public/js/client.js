@@ -4,20 +4,21 @@ let tanks = []; // All tanks in the game
 let shots = []; // All shots in the game
 var mytankid;
 var myTankIndex = -1;
-
+var testMap;
 var wallPos;
-var wall;
+var wall = [];
 var socket;
 var oldTankx, oldTanky, oldTankHeading;
-var fps = 5; // Frames per second
+var fps = 60; // Frames per second
 var PlayerName = "";
 var DEBUG = 0;
 var map; // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
 
 // Initial Setup
 function setup() {
-  map = new Map(testMap); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
-
+  //map = new Map(testMap); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
+  wallPos = createVector(100, 100);
+  wall = new Wall(wallPos);
   // Get the Player
   PlayerName = document.getElementById('playerName').value;
   console.log('Player: ' + PlayerName);
@@ -60,13 +61,14 @@ function setup() {
 // Draw the screen and process the position updates
 function draw() {
     background(0);
-    map.render();
-
+    //map.render();
+    wall.render();
     // Process shots
     for (var i = shots.length - 1; i >= 0; i--) {
       shots[i].render();
       shots[i].update();
-      if (shots[i].offscreen()) {
+
+      if (shots[i].offscreen()||wall.getsHitBy(shots[i])) {
         shots.splice(i, 1);
       }
       else {
@@ -83,26 +85,18 @@ function draw() {
           tanks[t].turn();
           tanks[t].update();
           tanks[t].turn();
+          tanks[t].stayOnScreen(); //replaces the check for if they are beyond any of the boundaries
+          wall.collision(tanks[t]);
+          // map.features.forEach(f => { // 11/21/2019 - Heidi - Handles the collision 
+          //   if (f.collision())
+          //     f.collision(tanks[t]);
+          // });
 
-          map.features.forEach(f => { // 11/21/2019 - Heidi - Handles the collision 
-            if (f.collision())
-              f.collision(tanks[t]);
-          });
-
-          // Check for off screen and don't let it go any further
-          if(tanks[t].pos.x < 0)
-            tanks[t].pos.x = 0;
-            if(tanks[t].pos.x > win.width)
-            tanks[t].pos.x = win.width;
-            if(tanks[t].pos.y < 0)
-            tanks[t].pos.y = 0;
-            if(tanks[t].pos.y > win.height)
-            tanks[t].pos.y = win.height;
+          
+          
             
         }
-        else {  // Only render if within 150 pixels
-//          var dist = Math.sqrt( Math.pow((tanks[myTankIndex].pos.x-tanks[t].pos.x), 2) + Math.pow((tanks[myTankIndex].pos.y-tanks[t].pos.y), 2) );
-//          if(dist < 151)
+        else {  
             tanks[t].render();
         }
       }
