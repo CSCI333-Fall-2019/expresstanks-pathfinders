@@ -6,11 +6,11 @@ var mytankid;
 var myTankIndex = -1;
 var testMap;
 
-//var obsPos;
-//var obstacle;
+var obsPos;
+var obstacle;
 
 var wallPos;
-var wall = [];
+// var wall = [];
 var socket;
 var oldTankx, oldTanky, oldTankHeading;
 var fps = 60; // Frames per second
@@ -23,8 +23,8 @@ function setup() {
   //map = new Map(testMap); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
   wallPos = createVector(100, 100);
   wall = new Wall(wallPos);
-  //obsPos = createVector(200, 200);
-  //obstacle = new Obstacle(obsPos);
+  obsPos = createVector(200, 200);
+  obstacle = new Obstacle(obsPos);
 
   // Get the Player
   PlayerName = document.getElementById('playerName').value;
@@ -73,7 +73,7 @@ function draw() {
     background(0);
     //map.render();
     wall.render();
-    //obstacle.render();
+    obstacle.render();
 
     map.render(); // 11/21/2019 - Heidi - Renders the map object (and any children of the map object)
 
@@ -82,14 +82,16 @@ function draw() {
       shots[i].render();
       shots[i].update();
 
-      if (shots[i].offscreen()||wall.getsHitBy(shots[i])) {
-        shots.splice(i, 1);
-      }
-      else {
-        let shotData = { x: shots[i].pos.x, y: shots[i].pos.y, 
-          shotid: shots[i].shotid };
-        socket.emit('ClientMoveShot', shotData);
-      }
+      map.features.forEach(wall => {
+        if (shots[i].offscreen()||wall.getsHitBy(shots[i])) {
+          shots.splice(i, 1);
+        }
+        else {
+          let shotData = { x: shots[i].pos.x, y: shots[i].pos.y, 
+            shotid: shots[i].shotid };
+          socket.emit('ClientMoveShot', shotData);
+        }
+      });
     }
     // Process all the tanks by iterating through the tanks array
     if(tanks && tanks.length > 0) {
@@ -100,11 +102,10 @@ function draw() {
           tanks[t].update();
           tanks[t].turn();
           tanks[t].stayOnScreen(); //replaces the check for if they are beyond any of the boundaries
-          wall.collision(tanks[t]);
-          // map.features.forEach(f => { // 11/21/2019 - Heidi - Handles the collision 
-          //   if (f.collision())
-          //     f.collision(tanks[t]);
-          // });
+          // wall.collision(tanks[t]);
+          map.features.forEach(wall => { // 11/21/2019 - Heidi - Handles the collision 
+            wall.collision(tanks[t]);
+          });
 
           
           

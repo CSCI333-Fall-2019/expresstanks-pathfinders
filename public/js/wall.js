@@ -11,6 +11,7 @@ class Wall{
     render() {
         fill(this.color);
         rect(this.pos.x, this.pos.y, 60, 60);
+
     }
 
     dist(x1, x2, y1, y2) {
