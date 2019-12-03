@@ -7,7 +7,7 @@
 /* # # # # # # # # # # Documentation # # # # # # # # # # */
 class Map {
    // Takes a text file and interprets the characters in it to create an array of the various spaces
-      constructor() {
+      constructor(jObj) {
       // Set up starting zone arrays
       this.sz_t1 = [];
       this.sz_t2 = [];
