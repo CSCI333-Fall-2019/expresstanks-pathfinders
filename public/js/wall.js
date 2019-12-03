@@ -10,7 +10,7 @@ class Wall{
 
     render() {
         fill(this.color);
-        rect(this.pos.x, this.pos.y, 60, 60);
+        rect(this.pos.x, this.pos.y, this.width, this.height);
 
     }
 
