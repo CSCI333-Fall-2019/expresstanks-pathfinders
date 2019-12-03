@@ -5,6 +5,10 @@ let shots = []; // All shots in the game
 var mytankid;
 var myTankIndex = -1;
 var testMap;
+
+//var obsPos;
+//var obstacle;
+
 var wallPos;
 var wall = [];
 var socket;
@@ -19,6 +23,9 @@ function setup() {
   //map = new Map(testMap); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
   wallPos = createVector(100, 100);
   wall = new Wall(wallPos);
+  //obsPos = createVector(200, 200);
+  //obstacle = new Obstacle(obsPos);
+
   // Get the Player
   PlayerName = document.getElementById('playerName').value;
   console.log('Player: ' + PlayerName);
@@ -35,6 +42,9 @@ function setup() {
   var canvas = createCanvas(win.width, win.height);
   canvas.parent('sketch-holder');
 
+  map = new Map(); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
+  console.log(map); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
+  
   // Set the framerate so everyone is *hopefully* the same
   frameRate(fps); // As low as possible to not tax slow systems
 
@@ -63,6 +73,10 @@ function draw() {
     background(0);
     //map.render();
     wall.render();
+    //obstacle.render();
+
+    map.render(); // 11/21/2019 - Heidi - Renders the map object (and any children of the map object)
+
     // Process shots
     for (var i = shots.length - 1; i >= 0; i--) {
       shots[i].render();

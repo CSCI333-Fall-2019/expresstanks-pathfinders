@@ -1,7 +1,5 @@
 
-
-
-class Wall {
+class Wall{
 
     constructor(pos) {
         this.pos = pos;

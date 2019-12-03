@@ -6,7 +6,6 @@ const request = require('request');
 // Game items to remember
 var tanks = [];
 var shots = [];
-var map = new Map(testMap); // 11/21/2019 - Heidi - New map object to pass down to the client (this is the only change in the server file)
 
 // Set up the server
 // process.env.PORT is related to deploying on AWS
