@@ -13,12 +13,12 @@ class Obstacle {
 
     // one less life for hitting obstacle
     collision(tank) {
-        var dist = this.dist(this.pos.x, this.pos.y, tank.pos.x, tank.pos.y);
-        console.log(tank.heading);
+        // var dist = this.dist(this.pos.x, this.pos.y, tank.pos.x, tank.pos.y);
+        // console.log(tank.heading);
 
-        if (dist < this.width) {
-            tank.destroyed = true;
-        }
+        // if (dist < this.width) {
+            // tank.destroyed = true;
+        // }
     }
 
     getsHitBy() {
