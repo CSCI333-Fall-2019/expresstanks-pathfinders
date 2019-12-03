@@ -6,8 +6,8 @@ var mytankid;
 var myTankIndex = -1;
 var testMap;
 
-//var obsPos;
-//var obstacle;
+var obsPos;
+var obstacle;
 
 var wallPos;
 var wall = [];
@@ -23,8 +23,8 @@ function setup() {
   //map = new Map(testMap); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
   wallPos = createVector(100, 100);
   wall = new Wall(wallPos);
-  //obsPos = createVector(200, 200);
-  //obstacle = new Obstacle(obsPos);
+  obsPos = createVector(200, 200);
+  obstacle = new Obstacle(obsPos);
 
   // Get the Player
   PlayerName = document.getElementById('playerName').value;
@@ -73,7 +73,7 @@ function draw() {
     background(0);
     //map.render();
     wall.render();
-    //obstacle.render();
+    obstacle.render();
 
     map.render(); // 11/21/2019 - Heidi - Renders the map object (and any children of the map object)
 
