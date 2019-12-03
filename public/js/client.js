@@ -5,6 +5,9 @@ let shots = []; // All shots in the game
 var mytankid;
 var myTankIndex = -1;
 
+//var obsPos;
+//var obstacle;
+
 var wallPos;
 var wall;
 var socket;
@@ -16,6 +19,9 @@ var map; // 11/21/2019 - Heidi - Map object (which will be transmitted down from
 
 // Initial Setup
 function setup() {
+  //obsPos = createVector(200, 200);
+  //obstacle = new Obstacle(obsPos);
+
   // Get the Player
   PlayerName = document.getElementById('playerName').value;
   console.log('Player: ' + PlayerName);
@@ -61,6 +67,8 @@ function setup() {
 // Draw the screen and process the position updates
 function draw() {
     background(0);
+    //obstacle.render();
+
     map.render(); // 11/21/2019 - Heidi - Renders the map object (and any children of the map object)
 
     // Process shots

@@ -1,24 +1,28 @@
 
-class Obstacle{
-
+class Obstacle {
     constructor(pos) {
-        this.pos = pos
-        this.width = 50
-        this.height = 50
+        this.pos = pos;
+        this.width = 50;
+        this.height = 50;
     }
 
     render() {
-        fill(150, 30, 90)
-        ellipse(this.pos.x, this.pos.y, this.width, this.height)
+        fill(150, 30, 90);
+        ellipse(this.pos.x, this.pos.y, this.width, this.height);
     }
 
     // one less life for hitting obstacle
-    hitObstacle(tank) {
-        console.log(tank.heading)
+    collision(tank) {
+        var dist = this.dist(this.pos.x, this.pos.y, tank.pos.x, tank.pos.y);
+        console.log(tank.heading);
 
-        if (dist) {
-            
+        if (dist < this.width) {
+            tank.destroyed = true;
         }
+    }
+
+    getsHitBy() {
+        return false;
     }
 
 }
