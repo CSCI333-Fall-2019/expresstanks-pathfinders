@@ -1,10 +1,10 @@
 
 class Wall{
 
-    constructor(pos) {
+    constructor(pos, w, h) {
         this.pos = pos;
-        this.width = 60;
-        this.height = 60;
+        this.width = w;
+        this.height = h;
         this.color = color(120, 100, 200);
     }
 
