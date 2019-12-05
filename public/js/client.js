@@ -74,17 +74,20 @@ function draw() {
     for (var i = shots.length - 1; i >= 0; i--) {
       shots[i].render();
       shots[i].update();
-
+      let curr = shots[i];
       map.features.forEach(wall => {
-        if (shots[i].offscreen()||wall.getsHitBy(shots[i])) {
-          shots.splice(i, 1);
-        }
-        else {
-          let shotData = { x: shots[i].pos.x, y: shots[i].pos.y, 
-            shotid: shots[i].shotid };
-          socket.emit('ClientMoveShot', shotData);
+        if(wall.getsHitBy(curr)) {
+          shots.splice(i,1);
         }
       });
+        if(curr.offscreen()){
+          shots.splice(i, 1);
+        }else {
+          let shotData = { x: curr.pos.x, y: curr.pos.y, 
+            shotid: curr.shotid };
+          socket.emit('ClientMoveShot', shotData);
+        }
+   
     }
     // Process all the tanks by iterating through the tanks array
     if(tanks && tanks.length > 0) {
