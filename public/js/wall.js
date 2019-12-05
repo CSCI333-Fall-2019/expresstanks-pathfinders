@@ -21,8 +21,8 @@ class Wall{
 
     collision(tank) {
         var dist = this.dist(this.pos.x, tank.pos.x, this.pos.y, tank.pos.y);
-        if (dist < this.width) {
-            tank.moveForward(-0.4);
+        if (dist < this.width*2) {
+            tank.stopMotion();
         }
     }
 

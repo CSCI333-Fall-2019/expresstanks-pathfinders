@@ -5,7 +5,7 @@ let shots = []; // All shots in the game
 var mytankid;
 var myTankIndex = -1;
 var testMap;
-
+var isOnWall;
 var obsPos;
 var obstacle;
 
@@ -21,11 +21,7 @@ var map; // 11/21/2019 - Heidi - Map object (which will be transmitted down from
 // Initial Setup
 function setup() {
   //map = new Map(testMap); // 11/21/2019 - Heidi - Map object (which will be transmitted down from the server rather than created here)
-  wallPos = createVector(100, 100);
-  wall = new Wall(wallPos);
-  obsPos = createVector(200, 200);
-  obstacle = new Obstacle(obsPos);
-
+  isOnWall = false;
   // Get the Player
   PlayerName = document.getElementById('playerName').value;
   console.log('Player: ' + PlayerName);
@@ -71,9 +67,6 @@ function setup() {
 // Draw the screen and process the position updates
 function draw() {
     background(0);
-    //map.render();
-    wall.render();
-    obstacle.render();
 
     map.render(); // 11/21/2019 - Heidi - Renders the map object (and any children of the map object)
 
@@ -102,9 +95,10 @@ function draw() {
           tanks[t].update();
           tanks[t].turn();
           tanks[t].stayOnScreen(); //replaces the check for if they are beyond any of the boundaries
-          // wall.collision(tanks[t]);
+          
           map.features.forEach(wall => { // 11/21/2019 - Heidi - Handles the collision 
             wall.collision(tanks[t]);
+           // console.log(collision);
           });
 
           
@@ -141,6 +135,7 @@ function draw() {
     if (tanks[myTankIndex].destroyed)
       return;
 
+    
     if (key == ' ') {                       // Fire Shell
       const shotid = random(0, 50000);
       shots.push(new Shot(shotid, tanks[myTankIndex].tankid, tanks[myTankIndex].pos, 
@@ -153,7 +148,7 @@ function draw() {
       tanks[myTankIndex].setRotation(0.1);
     } else if (keyCode == LEFT_ARROW) {   // Move Left
       tanks[myTankIndex].setRotation(-0.1);
-    } else if (keyCode == UP_ARROW) {     // Move Forward
+    } else if (keyCode == UP_ARROW) { 
       tanks[myTankIndex].moveForward(1.0);
     } else if (keyCode == DOWN_ARROW) {   // Move Back
       tanks[myTankIndex].moveForward(-1.0);
